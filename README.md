@@ -206,7 +206,7 @@ Karena setiap widget yang digunakan pada `Ivan's Book Store` saat ini adalah Sta
     }
     }
     ```
-5. Menambahkan class-class widget seperti ItemCard dan SnackBar kepada `menu.dart`
+5. Menambahkan class-class widget seperti ItemCard dan SnackBar kepada `menu.dart` untuk menyesuaikan fungsionalitas dan tampilan app
     ```dart
     class InfoCard extends StatelessWidget {
     // Kartu informasi yang menampilkan title dan content.
