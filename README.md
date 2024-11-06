@@ -64,9 +64,9 @@ Karena setiap widget yang digunakan pada `Ivan's Book Store` saat ini adalah Sta
 
 ### Step by Step Tugas 7
 1.  Membuat projek Flutter baru dengan menjalankan _command_ .
-  ```
+    ```
     flutter create ivans_book_store
-  ```
+    ```
 2. Memodifikasi main.dart pada direktori ivans_book_store/lib menjadi
     ``` dart
     import 'package:flutter/material.dart';
