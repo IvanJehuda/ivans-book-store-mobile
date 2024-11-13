@@ -305,3 +305,88 @@ Karena setiap widget yang digunakan pada `Ivan's Book Store` saat ini adalah Sta
 
     ```
 6. Membuat repositori baru pada github bertajuk `ivans-book-store-mobile` dan melakukan push kepada repositori tersebut.
+## Tugas 8
+### Kegunaan `const` di Flutter
+
+`const` di Flutter digunakan untuk menandai bahwa sebuah variabel, konstanta, atau widget bersifat konstan atau tidak berubah. Penggunaan `const` memberikan beberapa keuntungan, yaitu:
+
+1. **Meningkatkan Performa**: Dengan menandai sesuatu sebagai konstan, Flutter dapat mengoptimalkan proses build dan render sehingga aplikasi menjadi lebih responsif dan cepat.
+
+2. **Menghemat Memori**: Objek yang ditandai `const` hanya dibuat sekali di memori dan dapat digunakan kembali di berbagai tempat dalam kode, mengurangi penggunaan memori.
+
+3. **Immutabilitas**: Variabel atau widget yang ditandai `const` tidak dapat diubah setelah dibuat, membantu menjaga konsistensi dan mencegah bug yang disebabkan oleh perubahan tak terduga.
+
+### Kapan Menggunakan `const`?
+
+Anda sebaiknya menggunakan `const` dalam situasi berikut:
+
+1. **Widget Statis**: Widget yang tidak memerlukan interaksi atau perubahan state, seperti `Text`, `Icon`, atau `Container`.
+2. **Konstanta**: Nilai-nilai yang tidak berubah selama aplikasi berjalan, seperti warna, ukuran, atau teks.
+3. **Immutable Data**: Data yang tidak berubah, seperti konfigurasi, pengaturan, atau metadata.
+4. **Function Parameters**: Parameter fungsi yang tidak berubah selama eksekusi fungsi.
+
+### Kapan Tidak Menggunakan `const`?
+
+Meskipun penggunaan `const` sangat dianjurkan, ada beberapa kasus di mana Anda sebaiknya tidak menggunakannya:
+
+1. **Widget Interaktif**: Widget yang memerlukan interaksi pengguna atau perubahan state, seperti `TextField`, `Button`, atau `Switch`.
+2. **Data yang Berubah**: Data yang dapat berubah selama aplikasi berjalan, seperti data yang diambil dari API atau disimpan dalam database.
+3. **Fungsi dengan Side-Effects**: Fungsi yang memiliki efek samping, seperti memanggil API atau mengubah state global.
+### Column dan Row di Flutter
+Column dan Row adalah dua widget layout dasar di Flutter yang digunakan untuk mengatur posisi dan orientasi anak-anak widget. Column menyusun anak-anak widget secara vertikal, sedangkan Row menyusun anak-anak widget secara horizontal. 
+
+**Contoh Implementasi Column:**
+
+```dart
+Column(
+  children: [
+    Text('Item 1'),
+    SizedBox(height: 16.0),
+    Text('Item 2'),
+    SizedBox(height: 16.0),
+    Text('Item 3'),
+  ],
+)
+```
+
+**Contoh Implementasi Row:**
+
+```dart
+Row(
+  children: [
+    Icon(Icons.favorite, color: Colors.red),
+    SizedBox(width: 16.0),
+    Text('Favorite'),
+    Spacer(),
+    ElevatedButton(
+      onPressed: () {},
+      child: Text('Click me'),
+    ),
+  ],
+)
+```
+### Element input yang digunakan serta tidak
+- Pada aplikasi Flutter, "TextFormField" adalah _widget_ yang dapat membuat elemen input berupa _text field_. Di proyek ini, saya menggunakan "TextFormField" untuk membuat elemen input seperti "nama", "deskripsi", "harga", dan "stok", serta "writer".
+
+- Pada aplikasi Flutter, "ElevatedButton" adalah _widget_ yang digunakan untuk membuat tombol dengan _elevation_. Di proyek ini, saya menggunakan "ElevatedButton" untuk membuat tombol "Save".
+
+
+
+Ada beberapa element input flutter yang tidak saya gunakan pada tugas kali ini seperti: "Field Text", "Dropdown Button", "Checkbox", "Radio", "Switch", dan lainnya.
+
+### Tema apada aplikasi flutter
+Ya, saya menggunakan tema ke dalam aplikasi yang saya buat. Saya menggunakan ThemeData dalam tema MaterialApp di main.dart untuk menentukan warna utama dan warna sekunder. Dengan menggunakan ColorScheme, warna utama dan sekunder dapat diatur. Misalnya, warna utama diset ke `Colors.amber`, dan warna sekunder diset ke warna oranye lebih yang lebih gelap (`Colors.amber[900]`).
+
+### Navigasi dalam aplikasi flutter
+Dalam aplikasi ini, saya menggunakan metode navigasi `Navigator.push` dan `Navigator.pop`. Metode pertama digunakan untuk menambahkan halaman baru ke dalam stack navigasi. Dengan menekan halaman baru di atas halaman sebelumnya, halaman tersebut menjadi halaman aktif yang dapat dilihat pengguna. Halaman sebelumnya tetap ada di dalam stack, sehingga pengguna dapat kembali ke sana jika diperlukan.
+
+Sebaliknya, metode `Navigator.pop` digunakan untuk kembali ke halaman sebelumnya dalam stack. Ketika pop dipanggil, Flutter menghapus halaman aktif dari stack dan kembali ke halaman sebelumnya. Ini berguna ketika pengguna telah menyelesaikan interaksi pada halaman saat ini dan ingin kembali.
+
+
+
+Saya juga membuat drawer untuk memudahkan navigasi di dalam aplikasi.
+
+
+
+
+
