@@ -387,6 +387,52 @@ Sebaliknya, metode `Navigator.pop` digunakan untuk kembali ke halaman sebelumnya
 Saya juga membuat drawer untuk memudahkan navigasi di dalam aplikasi.
 
 
+## Tugas 9
+### Pentingnya models dalam data delivery Json
+Model berfungsi sebagai representasi terstruktur dari data yang dikirim atau diterima, memungkinkan untuk bekerja dengan data secara lebih efisien dan aman. Dengan mendefinisikan model, kita bisa memastikan bahwa setiap atribut data memiliki tipe yang spesifik, yang membantu mencegah kesalahan tipe data yang dapat terjadi saat mengakses atau memanipulasi data. Model juga memudahkan pemrosesan data karena memungkinkan operasi seperti filtering, sorting, Karena strukturnya yang lebih terorganisir dan mudah dipahami, terutama ketika proyek berkembang dan melibatkan lebih banyak tim, model juga meningkatkan keberlanjutan dan efisiensi pemeliharaan kode karena perubahan pada struktur JSON hanya perlu diperbarui di dalam model itu sendiri, yang mengurangi risiko kesalahan dan meningkatkan efisiensi pemeliharaan kode.
+
+
+Tanpa model, kita harus menangani data JSON secara langsung sebagai Map<String, dynamic> atau dynamic. Ini meningkatkan risiko kesalahan tipe data dan kesalahan ketik serta membuat pemrosesan data lebih rumit dan tidak terstruktur. Akibatnya, kode dapat berantakan dan sulit dipelihara, terutama pada proyek yang lebih besar dan kompleks. Selain itu, tanpa model, aplikasi lebih cenderung mengalami kesalahan saat beroperasi karena tidak ada jaminan bahwa data yang diakses memiliki tipe yang tepat atau bahwa semua tekan yang diperlukan ada dalam JSON.
+
+
+
+### Fungsi library http
+Library HTTP dapat melakukan berbagai jenis permintaan HTTP seperti GET, POST, dan lainnya, yang memungkinkan aplikasi berkomunikasi dengan server atau API eksternal. Dengan library ini, pengembang dapat dengan mudah mengirim dan menerima data dalam format JSON, yang merupakan format data yang umum digunakan untuk pertukaran informasi antar aplikasi. Selain itu, library ini menangani autentikasi melalui header, memastikan bahwapermintaan yang dikirimkan terverifikasi dan memiliki hak akses yang sesuai.
+
+### Fungsi `CookieRequest`
+CookieRequest mengelola cookie untuk autentikasi berbasis sesi secara otomatis, memastikan bahwa sesi pengguna konsisten dengan setiap permintaan yang dibuat. Dengan demikian, proses autentikasi menjadi lebih mudah dan efisien karena CookieRequest menangani penyimpanan dan pengiriman cookie tanpa perlu intervensi manual dari pengembang. Ini meningkatkan keamanan dengan menjaga integritas sesi dan mempercepat interaksi.
+
+
+
+### Mekanisme Data Delivery di Flutter
+Dimulai dengan pengguna memasukkan data ke dalam aplikasi Flutter. Kemudian, data diubah menjadi format JSON agar mudah dikirim ke backend. Backend mengolah data untuk menyimpannya di database atau menjalankan logika tertentu, dan setelah selesai, server mengirimkan respons balik, biasanya dalam format JSON. Flutter menerima respons ini, mengolah datanya, dan memperbarui tampilan aplikasi agar pengguna dapat melihat hasil input.
+
+
+
+### Proses autentikasi pada flutter
+Proses autentikasi dimulai ketika data akun Flutter dikirim ke backend Django. Setelah validasi, Django memvalidasi data tersebut, baik untuk login dengan membuat sesi atau registrasi dengan menyimpan data pengguna baru. Setelah validasi selesai, Django mengirimkan respons kembali ke Flutter, yang dapat mencakup status autentikasi atau pesan tertentu. Flutter kemudian memproses respons ini dan memperbarui antarmuka pengguna sesuai dengan status autentikasi, misalnya menampilkan menu utama jika login berhas.
+
+### Step by step Tugas WEEK 9
+1. Melakukan integrasi fitur login, login, dan logout pada proyek django. Selain itu, menambahkan provider dan pbp_django_auth, dan menambahkan cookie request pada halaman yang diperlukan.
+
+2. Membuat model khusus untuk parsing data json
+
+3. Membuat page yang menampilkan nama, harga, dan deskripsi setiap item berdasarkan endpoint JSON django
+
+4.  Membuat halaman menampilkan deskirpsi produk secara lebih detail yang akan muncul ketika sebuah produk ditekan pada page `list_product`
+
+5. Melakukan proses filter halaman daftar item dengan hanya menampilkan item yang terkait dengan pengguna yang telah login.
+
+6. Meletakan button daftar produk di drawer kiri.
+
+7. Membuat halaman login dan registrasi yang terintegrasi dengan views pada django
+
+
+
+
+
+
+
 
 
 

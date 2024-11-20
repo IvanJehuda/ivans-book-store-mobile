@@ -1,23 +1,31 @@
+import 'package:ivans_book_store/screens/list_productentry.dart';
 import 'package:flutter/material.dart';
+import 'package:ivans_book_store/screens/login.dart';
 import 'package:ivans_book_store/screens/productentry_form.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+
+class ItemHomepage {
+  final String name;
+  final IconData icon;
+  final Color color;
+
+  ItemHomepage(this.name, this.icon, this.color);
+}
 
 class ItemCard extends StatelessWidget {
-  // Menampilkan kartu dengan ikon, nama, dan warna khusus.
-
   final ItemHomepage item;
 
-  const ItemCard(this.item, {super.key});
+  const ItemCard({super.key, required this.item, required Color color});
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
-      // Menggunakan warna yang ditetapkan pada masing-masing item.
       color: item.color,
       borderRadius: BorderRadius.circular(12),
-
       child: InkWell(
-        // Aksi ketika kartu ditekan.
-        onTap: () {
+        onTap: () async {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
@@ -26,8 +34,39 @@ class ItemCard extends StatelessWidget {
           if (item.name == "Tambah Produk") {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ProductEntryFormPage()),
+              MaterialPageRoute(
+                builder: (context) => const ProductEntryFormPage(),
+              ),
             );
+          } else if (item.name == "Lihat daftar Produk") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductEntryPage(),
+              ),
+            );
+          } else if (item.name == "Logout") {
+            final response = await request.logout(
+                "http://127.0.0.1:8000/auth/logout/");
+            String message = response["message"];
+            if (context.mounted) {
+              if (response['status']) {
+                String uname = response["username"];
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Sampai jumpa, $uname."),
+                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                  ),
+                );
+              }
+            }
           }
         },
         child: Container(
@@ -54,12 +93,4 @@ class ItemCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class ItemHomepage {
-  final String name;
-  final IconData icon;
-  final Color color;  // Tambahkan properti warna
-
-  ItemHomepage(this.name, this.icon, this.color);
 }

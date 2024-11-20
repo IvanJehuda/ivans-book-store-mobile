@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ivans_book_store/screens/list_productentry.dart';
 import 'package:ivans_book_store/screens/menu.dart';
 import 'package:ivans_book_store/screens/productentry_form.dart';
 
@@ -52,8 +53,8 @@ class LeftDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.mood),
-              title: const Text('Tambah Mood'),
+              leading: const Icon(Icons.add),
+              title: const Text('Tambah Produk'),
               // Bagian redirection ke MoodEntryFormPage
               onTap: () {
                 
@@ -64,6 +65,17 @@ class LeftDrawer extends StatelessWidget {
                   ));
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.store_rounded),
+              title: const Text('Daftar Produk'),
+              onTap: () {
+                  // Route menu ke halaman mood
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductEntryPage()),
+                  );
+              },
+          ),
 
         ],
       ),

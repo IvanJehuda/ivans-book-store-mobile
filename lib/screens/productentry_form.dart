@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:ivans_book_store/screens/menu.dart';
 import 'package:ivans_book_store/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ProductEntryFormPage extends StatefulWidget {
   const ProductEntryFormPage({super.key});
@@ -13,11 +18,12 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
   String _produk = "";
   String _deskripsi = "";
   int _harga = 0;
-  int _stock = 0;
-  String _writers = "";
+  String _author = "";
+  String _genre = ""; // Changed from stock to genre
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -111,23 +117,20 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Stock Produk",
-                    labelText: "Stock",
+                    hintText: "Genre Produk",
+                    labelText: "Genre",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _stock = int.tryParse(value!) ?? 0;
+                      _genre = value!;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Stock tidak boleh kosong!";
-                    }
-                    if (int.tryParse(value) == null) {
-                      return "Stock harus berupa angka!";
+                      return "Genre tidak boleh kosong!";
                     }
                     return null;
                   },
@@ -145,7 +148,7 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _writers = value!;
+                      _author = value!;
                     });
                   },
                   validator: (String? value) {
@@ -166,44 +169,56 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                         Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Produk berhasil tersimpan'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Nama Produk: $_produk'),
-                                    Text('Deskripsi: $_deskripsi'),
-                                    Text('Harga Produk: $_harga'),
-                                    Text('Stock: $_stock'),
-                                    Text('Penulis: $_writers'),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                    setState(() {
-                                      _produk = "";
-                                      _deskripsi = "";
-                                      _harga = 0;
-                                      _stock = 0;
-                                      _writers = "";
-                                    });
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                        final response = await request.postJson(
+                          "http://127.0.0.1:8000/create-flutter/",
+                          jsonEncode(<String, String>{
+                            'product': _produk,
+                            'deskripsi': _deskripsi,
+                            'harga': _harga.toString(),
+                            'author': _author,
+                            'genre': _genre,
+                          }),
                         );
+                        if (context.mounted) {
+                          if (response['status'] == 'success') {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text("Produk Berhasil Disimpan!"),
+                                  content: Text(
+                                    "Nama Produk: $_produk\n"
+                                    "Deskripsi: $_deskripsi\n"
+                                    "Harga: $_harga\n"
+                                    "Penulis: $_author\n"
+                                    "Genre: $_genre",
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => MyHomePage(),
+                                          ),
+                                        );
+                                      },
+                                      child: const Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content:
+                                  Text("Terdapat kesalahan, silakan coba lagi."),
+                            ));
+                          }
+                        }
                       }
                     },
                     child: const Text(
