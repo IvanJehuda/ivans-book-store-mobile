@@ -392,7 +392,7 @@ Saya juga membuat drawer untuk memudahkan navigasi di dalam aplikasi.
 Model berfungsi sebagai representasi terstruktur dari data yang dikirim atau diterima, memungkinkan untuk bekerja dengan data secara lebih efisien dan aman. Dengan mendefinisikan model, kita bisa memastikan bahwa setiap atribut data memiliki tipe yang spesifik, yang membantu mencegah kesalahan tipe data yang dapat terjadi saat mengakses atau memanipulasi data. Model juga memudahkan pemrosesan data karena memungkinkan operasi seperti filtering, sorting, Karena strukturnya yang lebih terorganisir dan mudah dipahami, terutama ketika proyek berkembang dan melibatkan lebih banyak tim, model juga meningkatkan keberlanjutan dan efisiensi pemeliharaan kode karena perubahan pada struktur JSON hanya perlu diperbarui di dalam model itu sendiri, yang mengurangi risiko kesalahan dan meningkatkan efisiensi pemeliharaan kode.
 
 
-Tanpa model, kita harus menangani data JSON secara langsung sebagai Map<String, dynamic> atau dynamic. Ini meningkatkan risiko kesalahan tipe data dan kesalahan ketik serta membuat pemrosesan data lebih rumit dan tidak terstruktur. Akibatnya, kode dapat berantakan dan sulit dipelihara, terutama pada proyek yang lebih besar dan kompleks. Selain itu, tanpa model, aplikasi lebih cenderung mengalami kesalahan saat beroperasi karena tidak ada jaminan bahwa data yang diakses memiliki tipe yang tepat atau bahwa semua tekan yang diperlukan ada dalam JSON.
+Tanpa model, kita harus menangani data JSON secara langsung. Ini meningkatkan risiko kesalahan tipe data dan kesalahan ketik serta membuat pemrosesan data lebih rumit dan tidak terstruktur. Akibatnya, kode dapat berantakan dan sulit dipelihara, terutama pada proyek yang lebih besar dan kompleks. Selain itu, tanpa model, aplikasi lebih cenderung mengalami kesalahan saat beroperasi karena tidak ada jaminan bahwa data yang diakses memiliki tipe yang tepat atau bahwa semua tekan yang diperlukan ada dalam JSON.
 
 
 
@@ -410,7 +410,7 @@ Dimulai dengan pengguna memasukkan data ke dalam aplikasi Flutter. Kemudian, dat
 
 
 ### Proses autentikasi pada flutter
-Proses autentikasi dimulai ketika data akun Flutter dikirim ke backend Django. Setelah validasi, Django memvalidasi data tersebut, baik untuk login dengan membuat sesi atau registrasi dengan menyimpan data pengguna baru. Setelah validasi selesai, Django mengirimkan respons kembali ke Flutter, yang dapat mencakup status autentikasi atau pesan tertentu. Flutter kemudian memproses respons ini dan memperbarui antarmuka pengguna sesuai dengan status autentikasi, misalnya menampilkan menu utama jika login berhas.
+Proses autentikasi dimulai ketika data akun Flutter dikirim ke backend Django. Setelah validasi, Django memvalidasi data tersebut, baik untuk login dengan membuat sesi atau registrasi dengan menyimpan data pengguna baru. Setelah validasi selesai, Django mengirimkan respons kembali ke Flutter, yang dapat mencakup status autentikasi atau pesan tertentu. Flutter kemudian memproses respons ini dan memperbarui antarmuka pengguna sesuai dengan status autentikasi, misalnya menampilkan menu utama jika login berhasil.
 
 ### Step by step Tugas WEEK 9
 1. Melakukan integrasi fitur login, login, dan logout pada proyek django. Selain itu, menambahkan provider dan pbp_django_auth, dan menambahkan cookie request pada halaman yang diperlukan.
